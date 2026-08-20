@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "test": "npm run clean && cucumber-js",
-    "test:smoke": "npm run clean && cucumber-js --tags '@smoke'",
+    "test:smoke": "npm run clean && cucumber-js --tags '@smoke' --format progress",
     "test:regression": "npm run clean && cucumber-js --tags '@regression'",
     "test:headed": "npm run clean && cross-env HEADLESS=false cucumber-js",
     "test:chromium": "npm run clean && cross-env BROWSER=chromium cucumber-js",
