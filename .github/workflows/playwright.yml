@@ -1,0 +1,48 @@
+name: ZincBank BDD Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+      BROWSER: chromium
+      HEADLESS: true
+      TEST_ENV: qa
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Validate TypeScript
+        run: npm run typecheck
+
+      - name: Run smoke tests
+        run: npm run test:smoke
+
+      - name: Upload test evidence
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: zincbank-test-evidence
+          path: |
+            allure-results/
+            test-results/
+          retention-days: 30
