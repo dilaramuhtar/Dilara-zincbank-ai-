@@ -18,7 +18,7 @@
     "allure:generate": "allure generate allure-results --clean -o allure-report",
     "allure:open": "allure open allure-report",
     "allure:serve": "allure serve allure-results",
-    "clean": "rimraf allure-results allure-report test-results"
+    "clean": "node -e \"const fs=require('fs'); for(const p of ['allure-results','allure-report','test-results']) fs.rmSync(p,{recursive:true,force:true})\""
   },
   "keywords": [],
   "author": "",
