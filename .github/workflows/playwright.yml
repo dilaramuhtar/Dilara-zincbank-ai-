@@ -11,6 +11,8 @@ jobs:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     env:
+      ZINCBANK_EMAIL: ${{ secrets.ZINCBANK_EMAIL }}
+      ZINCBANK_PASSWORD: ${{ secrets.ZINCBANK_PASSWORD }}
       ZINCBANK_PASSWORD_TEST_EMAIL: ${{ secrets.ZINCBANK_PASSWORD_TEST_EMAIL }}
       ZINCBANK_PASSWORD_TEST_PASSWORD: ${{ secrets.ZINCBANK_PASSWORD_TEST_PASSWORD }}
       CI: true
